@@ -28,9 +28,9 @@ const Homepage = () => {
       });
   }, []);
 
-  const handleClick = (_id, event) => {
+  const handleClick = (id, event) => {
     event.stopPropagation();
-    navigate(`/Gamedetails`);
+    navigate(`/Gamedetails/${id}`);
   };
 
   return (
@@ -41,7 +41,7 @@ const Homepage = () => {
           <ItemContainer
             key={id}
             onClick={(e) => {
-              handleClick(games._id, e);
+              handleClick(games.id, e);
             }}
           >
             <img src={games.thumbnail} alt="image" />
@@ -57,7 +57,7 @@ const Homepage = () => {
 export default Homepage;
 
 const Wrapper = styled.div`
-  background: #e70e02;
+  background: #780000;
 `;
 
 const Title = styled.div`

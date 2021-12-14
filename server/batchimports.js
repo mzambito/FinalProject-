@@ -1,5 +1,4 @@
 const { MongoClient } = require("mongodb");
-const { users } = require("./data/users");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -9,6 +8,7 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+const { users } = require("./data/users");
 
 const batchImport = async () => {
   // creates a new client
@@ -18,17 +18,20 @@ const batchImport = async () => {
   try {
     // connect to the client
     await client.connect();
+    console.log("connected");
 
     // connect to the database
     const db = client.db("Project");
+    console.log(users);
 
     await db.collection("users").insertMany(users);
     console.log("success");
+    client.close();
+    console.log("disconnected");
   } catch (err) {
-    console.log("err");
+    console.log(err);
   }
 
   // close the connection to the database server
-  client.close();
 };
 batchImport();

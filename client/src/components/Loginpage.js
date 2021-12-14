@@ -10,11 +10,10 @@ const Loginpage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(email);
   };
 
   useEffect(() => {
-    fetch("/getEmail", handleChange)
+    fetch("/getEmail")
       .then((res) => res.json())
       .then((data) => data.json());
   });
@@ -31,35 +30,7 @@ const Loginpage = () => {
             onChange={(event) => handleChange(event)}
           />
         </label>
-        <label for="fullName">FirstName:</label>
-        <input
-          type="text"
-          id="FirstName"
-          name="FirstName"
-          class="textInput"
-          autocomplete="on"
-          required
-        />
-        <label for="fullName">LastName:</label>
-        <input
-          type="text"
-          id="LastName"
-          name="LastName"
-          class="textInput"
-          autocomplete="on"
-          required
-        />
-        <label>
-          Password
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="textInput"
-            autocomplete="on"
-            required
-          />
-        </label>
+
         <label for="confirmPass">Confirm Password</label>
         <input
           type="password"

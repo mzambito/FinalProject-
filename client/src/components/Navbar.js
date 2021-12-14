@@ -22,7 +22,7 @@ export default Navbar;
 const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: #2f4858;
+  background-color: #c9ada7;
 `;
 const Title = styled.div`
   font-size: 40px;
