@@ -26,9 +26,12 @@ const Gamedetails = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleAddToProfile = () => {
-    AddToProfile(game);
-    navigate("/Profile");
+  const handleClick = () => {
+    fetch(`/library?email=name1@gmail.com&gameId=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (
@@ -37,9 +40,7 @@ const Gamedetails = () => {
         <ImageContainer>
           <Header>{game?.title}</Header>
           <Thumbnail src={game?.thumbnail} alt="image" />
-          <Button onClick={handleAddToProfile}>
-            {game?.id} Add to Library
-          </Button>
+          <Button onClick={() => handleClick()}>Add to Library</Button>
         </ImageContainer>
         <GameContainer>
           <About>About {game?.title}</About>
