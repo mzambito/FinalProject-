@@ -56,13 +56,19 @@ const Gamedetails = () => {
           <Button onClick={() => handleClick()}>
             Add to Profile's library
           </Button>
+          <DownloadContainer>
+            <Download>
+              Click on Download to be redirected to game page:
+            </Download>
+            <Url href={game?.game_url} target="_blank">
+              Download
+            </Url>
+          </DownloadContainer>
         </ImageContainer>
         <GameContainer>
           <About>About {game?.title}</About>
           <Description>{game?.description}</Description>
-          <Url hrf={game?.game_url} target="_blank">
-            {game?.title}
-          </Url>
+
           <ScreenshotsContainer>
             {game?.screenshots.map((imgsrc) => {
               return <Screenshots src={imgsrc.image} alt="image" />;
@@ -105,7 +111,27 @@ export default Gamedetails;
 const Wrapper = styled.div`
   background: #463f3a;
 `;
-const Url = styled.div``;
+
+const DownloadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Download = styled.div`
+  font-size: 30px;
+`;
+const Url = styled.a`
+  font-size: 60px
+  padding: 0px 30px;
+  font-size: 30px;
+  text-decoration: underline;
+  font-weight: bold;
+  &:visited {
+    color: none;
+  }
+  color: red;
+  
+ 
+`;
 const BigContainer = styled.div`
   display: flex;
   gap: 20em; ;
@@ -115,6 +141,7 @@ const Header = styled.div`
   font-size: 60px;
   font-weight: bold;
 `;
+
 const Container = styled.div`
   display: flex;
   justify-content: flex-start;
