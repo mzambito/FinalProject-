@@ -88,6 +88,7 @@ const MainContainer = styled.div`
 
 const Container = styled.div`
   background: #780000;
+  border: 5px solid;
 `;
 const User = styled.div`
   display: flex;
