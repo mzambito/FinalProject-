@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
+import CustomSelect from "./CustomSelect";
 const Homepage = () => {
   const { id } = useParams();
   const [games, setGames] = useState(null);
@@ -33,18 +34,24 @@ const Homepage = () => {
     navigate(`/Gamedetails/${id}`);
   };
 
+  // const handleGenre = (event) => {
+  //   setGenre(event.target.value);
+  // };
+
   return (
     <Wrapper>
-      <Title>Game list</Title>
+      <TitleContainer>
+        <Title>Game list</Title>
+      </TitleContainer>
       <Container>
-        {games?.map((games) => (
+        {games?.map((games, id) => (
           <ItemContainer
             key={id}
             onClick={(e) => {
               handleClick(games.id, e);
             }}
           >
-            <img src={games.thumbnail} alt="image" />
+            <img src={games.thumbnail} />
             <Gametitle>{games?.title}</Gametitle>
             <Genre>{games?.genre}</Genre>
           </ItemContainer>
@@ -60,10 +67,38 @@ const Wrapper = styled.div`
   background: #780000;
 `;
 
+const TitleContainer = styled.div`
+  /* display: flex; */
+`;
+
 const Title = styled.div`
   text-align: center;
   font-size: 60px;
 `;
+
+// const FilterContainer = styled.div`
+//   display: flex;
+//   /* justify-content: flex-start; */
+//   align-items: center;
+//   margin: 40px auto;
+//   width: 70%;
+//   padding: 10px;
+//   border-bottom: 2px solid #3c6e71;
+//   color: #353535;
+//   font-weight: bolder;
+//   font-size: 30px;
+// `;
+// const SelectContainer = styled.div`
+//   margin: 5px;
+// `;
+// const Select = styled.div`
+//   width: 150px;
+//   border: 2px solid #3c6e71;
+//   border-radius: 5px;
+//   margin-bottom: 10px;
+//   margin-left: 20px;
+//   font-size: 16px;
+// `;
 
 const Container = styled.div`
   display: flex;

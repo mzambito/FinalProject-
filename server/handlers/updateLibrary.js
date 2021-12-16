@@ -21,19 +21,20 @@ const updateLibrary = async (req, res) => {
     const db = client.db("Project");
 
     // Get the email from req.query
-    const { email, gameId } = req.query;
+    const { email } = req.query;
+    const { gameData } = req.body;
 
     // Create a query to find a user by email
     const query = { email };
 
-    const updateLib = { $addToSet: { library: { gameId } } };
+    const updateLib = { $addToSet: { library: { gameData } } };
 
     const result = await db.collection("users").updateOne(query, updateLib);
     console.log(result);
     // Disconnect from the client
     client.close();
     console.log("disconnected");
-    res.status(200).json({ status: 200, email, gameId });
+    res.status(200).json({ status: 200, email, gameData });
   } catch (err) {
     console.log("ERROR OCCURED: ", err);
   }

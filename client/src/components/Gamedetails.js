@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Gamedetails = () => {
+  const { user, isAuthenticated } = useAuth0();
   const { id } = useParams();
   const [game, setGame] = useState(null);
   let navigate = useNavigate();
@@ -27,10 +29,21 @@ const Gamedetails = () => {
   }, []);
 
   const handleClick = () => {
-    fetch(`/library?email=name1@gmail.com&gameId=${id}`)
-      .then((res) => res.json())
+    fetch(`/library?email=${user.email}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        gameData: game,
+      }),
+    })
+      .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   };
 
@@ -40,11 +53,16 @@ const Gamedetails = () => {
         <ImageContainer>
           <Header>{game?.title}</Header>
           <Thumbnail src={game?.thumbnail} alt="image" />
-          <Button onClick={() => handleClick()}>Add to Library</Button>
+          <Button onClick={() => handleClick()}>
+            Add to Profile's library
+          </Button>
         </ImageContainer>
         <GameContainer>
           <About>About {game?.title}</About>
           <Description>{game?.description}</Description>
+          <Url hrf={game?.game_url} target="_blank">
+            {game?.title}
+          </Url>
           <ScreenshotsContainer>
             {game?.screenshots.map((imgsrc) => {
               return <Screenshots src={imgsrc.image} alt="image" />;
@@ -85,9 +103,9 @@ const Gamedetails = () => {
 export default Gamedetails;
 
 const Wrapper = styled.div`
-  background: #463f3a; ;
+  background: #463f3a;
 `;
-
+const Url = styled.div``;
 const BigContainer = styled.div`
   display: flex;
   gap: 20em; ;
@@ -108,11 +126,16 @@ const GameContainer = styled.div`
   flex-direction: column;
   gap: 2em;
 `;
-const Button = styled.button``;
+const Button = styled.button`
+  font-size: 35px;
+  background: #780000;
+  border-radius: 5px;
+`;
 const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px;
+  gap: 2em;
 `;
 const Thumbnail = styled.img`
   height: 350px;
