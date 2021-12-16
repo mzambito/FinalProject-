@@ -62,6 +62,9 @@ const Profilepage = () => {
                   </Description>
                   <GenreInfo>Genre:</GenreInfo>
                   <Genre>{library?.gameData?.genre}</Genre>
+                  <Download href={library?.gameData?.game_url} target="_blank">
+                    Click me for Game's Website
+                  </Download>
                 </InfoContainer>
                 <ButtonContainer>
                   <Button
@@ -85,7 +88,14 @@ export default Profilepage;
 const MainContainer = styled.div`
   background: #463f3a; ;
 `;
-
+const Download = styled.a`
+  text-decoration: underline;
+  font-weight: bold;
+  &:visited {
+    color: none;
+  }
+  color: blue;
+`;
 const Container = styled.div`
   background: #780000;
   border: 5px solid;
