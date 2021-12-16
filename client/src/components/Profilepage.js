@@ -6,6 +6,14 @@ const Profilepage = () => {
   const { user, isAuthenticated } = useAuth0();
   const [library, setLibrary] = useState([]);
 
+  const handleClick = (id) => {
+    console.log(id);
+    const gameIndex = library.findIndex((game) => {
+      if (game.id === id) return game;
+    });
+    library.splice(gameIndex, 1);
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       fetch("/users/login", {
@@ -28,6 +36,7 @@ const Profilepage = () => {
         });
     }
   }, []);
+  console.log(library);
 
   return (
     isAuthenticated && (
@@ -55,7 +64,13 @@ const Profilepage = () => {
                   <Genre>{library?.gameData?.genre}</Genre>
                 </InfoContainer>
                 <ButtonContainer>
-                  <Button onClick={() => {}}>Delete</Button>
+                  <Button
+                    onClick={() => {
+                      handleClick(library?.gameData?.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </ButtonContainer>
               </Itemcontainer>
             ))}
@@ -111,7 +126,7 @@ const TitleDescription = styled.div`
   font-size: 30px;
   font-weight: bold;
 `;
-const Button = styled.div`
+const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;

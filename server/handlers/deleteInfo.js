@@ -10,6 +10,7 @@ const options = {
 
 const deleteInfo = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
+  const { id } = req.params;
   try {
     await client.connect();
 
