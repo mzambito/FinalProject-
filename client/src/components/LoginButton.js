@@ -13,7 +13,7 @@ const LoginButton = () => {
 export default LoginButton;
 const Button = styled.button`
   font-size: 25px;
-  background-color: #c9ada7;
+  background-color: #463f3a;
   border-radius: 5px;
   &:hover {
     background: #780000;
